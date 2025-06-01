@@ -1,37 +1,37 @@
-﻿usando UnityEngine;
+﻿using UnityEngine;
 
-// Controla o movimento e a rotação do jogador.
-classe pública PlayerController: MonoBehaviour
+// Controls player movement and rotation.
+public class PlayerController : MonoBehaviour
 {
-    public float speed = 5.0f; // Define a velocidade de movimento do jogador.
-public float rotationSpeed ​​= 120.0f; // Define a velocidade de rotação do jogador.
+    public float speed = 5.0f; // Set player's movement speed.
+    public float rotationSpeed = 120.0f; // Set player's rotation speed.
 
-private Rigidbody rb; // Referência ao Rigidbody do jogador.
+    private Rigidbody rb; // Reference to player's Rigidbody.
 
-// Start é chamado antes da atualização do primeiro quadro
-privado vazio Iniciar()
+    // Start is called before the first frame update
+    private void Start()
     {
-        rb = GetComponent<Rigidbody>(); // Acessar o Rigidbody do jogador.
+        rb = GetComponent<Rigidbody>(); // Access player's Rigidbody.
     }
 
-    // A atualização é chamada uma vez por quadro
-    Atualização vazia()
-{
-
-}
-
-
-// Lidar com movimento e rotação baseados em física.
-privado void FixedUpdate()
+    // Update is called once per frame
+    void Update()
     {
-        // Mover o jogador com base na entrada vertical.
-        float moveVertical = Entrada.GetAxis("Vertical");
-Movimento Vector3 = transform.forward * moveVertical * speed * Time.fixedDeltaTime;
-rb.MovePosition(rb.position + movimento);
 
-// Girar o jogador com base na entrada horizontal.
-float turn = Input.GetAxis("Horizontal") * rotaçãoSpeed ​​* Tempo.fixedDeltaTime;
-Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
-rb.MoveRotation(rb.rotação * turnRotation);
+    }
+
+
+    // Handle physics-based movement and rotation.
+    private void FixedUpdate()
+    {
+        // Move player based on vertical input.
+        float moveVertical = Input.GetAxis("Vertical");
+        Vector3 movement = transform.forward * moveVertical * speed * Time.fixedDeltaTime;
+        rb.MovePosition(rb.position + movement);
+
+        // Rotate player based on horizontal input.
+        float turn = Input.GetAxis("Horizontal") * rotationSpeed * Time.fixedDeltaTime;
+        Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
+        rb.MoveRotation(rb.rotation * turnRotation);
     }
 }
